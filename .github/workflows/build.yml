@@ -1,0 +1,30 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate Secrets.xcconfig
+        run: |
+          cat > SonyCameraToGooglePhotos/Secrets.xcconfig <<EOF
+          GOOGLE_CLIENT_ID = ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET = ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          EOF
+
+      - name: Build
+        run: |
+          xcodebuild -project SonyCameraToGooglePhotos/SonyCameraToGooglePhotos.xcodeproj \
+            -scheme SonyCameraToGooglePhotos \
+            -destination 'platform=macOS' \
+            -configuration Release \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            build

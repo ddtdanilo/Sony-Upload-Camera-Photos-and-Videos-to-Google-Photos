@@ -24,7 +24,9 @@ struct ContentView: View {
     }
 
     var body: some View {
-        if authViewModel.isLoading {
+        if !Constants.OAuth.isConfigured {
+            SetupGuideView()
+        } else if authViewModel.isLoading {
             ProgressView("Restoring session...")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         } else if !authViewModel.isAuthenticated {

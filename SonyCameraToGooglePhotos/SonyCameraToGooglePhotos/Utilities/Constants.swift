@@ -2,9 +2,19 @@ import Foundation
 
 enum Constants {
     enum OAuth {
-        // Replace these with your Google Cloud Console credentials
-        static let clientID = "YOUR_CLIENT_ID.apps.googleusercontent.com"
-        static let clientSecret = "YOUR_CLIENT_SECRET"
+        static var clientID: String {
+            Bundle.main.infoDictionary?["GoogleClientID"] as? String ?? ""
+        }
+
+        static var clientSecret: String {
+            Bundle.main.infoDictionary?["GoogleClientSecret"] as? String ?? ""
+        }
+
+        static var isConfigured: Bool {
+            !clientID.isEmpty && !clientSecret.isEmpty
+                && clientID != "YOUR_CLIENT_ID.apps.googleusercontent.com"
+                && clientSecret != "YOUR_CLIENT_SECRET"
+        }
 
         static let authorizationEndpoint = URL(string: "https://accounts.google.com/o/oauth2/v2/auth")!
         static let tokenEndpoint = URL(string: "https://oauth2.googleapis.com/token")!

@@ -44,3 +44,4 @@ Package.resolved
 client_secret*.json
 GoogleService-Info.plist
 Secrets.swift
+Secrets.xcconfig

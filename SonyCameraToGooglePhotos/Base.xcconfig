@@ -1,0 +1,9 @@
+// Base.xcconfig — Default build settings for the app target
+//
+// Secrets.xcconfig (gitignored) overrides these empty defaults with real credentials.
+// The #include? directive silently skips the file if it doesn't exist (Xcode 9+).
+
+GOOGLE_CLIENT_ID =
+GOOGLE_CLIENT_SECRET =
+
+#include? "Secrets.xcconfig"

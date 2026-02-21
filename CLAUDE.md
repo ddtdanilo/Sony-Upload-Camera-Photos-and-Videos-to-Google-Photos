@@ -41,6 +41,17 @@ open SonyCameraToGooglePhotos/SonyCameraToGooglePhotos.xcodeproj
 ## Git Commits
 - NEVER add Co-Authored-By lines for Claude or any AI assistant in commit messages
 
-## Secrets
-- OAuth Client ID and Secret must be configured in Constants.swift
-- NEVER commit actual credentials - the file contains placeholder values
+## Secrets / Credential Management
+
+- OAuth credentials are loaded at runtime from Info.plist via `Bundle.main.infoDictionary`
+- `Base.xcconfig` (committed) uses `#include?` to optionally include `Secrets.xcconfig` (gitignored)
+- `Info.plist` uses `$(GOOGLE_CLIENT_ID)` / `$(GOOGLE_CLIENT_SECRET)` variable substitution
+- For local development: copy `Secrets.xcconfig.example` → `Secrets.xcconfig` and fill in credentials
+- For CI: GitHub Secrets inject values into a generated `Secrets.xcconfig` at build time
+- NEVER commit actual credentials
+
+## CI/CD
+
+- `.github/workflows/build.yml` — builds on push to main / PRs
+- `.github/workflows/release.yml` — archives + DMG + GitHub Release on tag push (v*.*.*)
+- Both workflows generate `Secrets.xcconfig` from GitHub Secrets
