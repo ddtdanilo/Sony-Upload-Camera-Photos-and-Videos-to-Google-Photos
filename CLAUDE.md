@@ -7,7 +7,7 @@ Native macOS application (SwiftUI) for uploading photos and videos from a Sony A
 - **Pattern**: MVVM with Services layer
 - **UI Framework**: SwiftUI
 - **Target**: macOS 13.0+ (Universal Binary: Intel + Apple Silicon)
-- **Dependencies**: AppAuth (OAuth 2.0), KeychainAccess (Keychain storage) via SPM
+- **Dependencies**: None (uses native Keychain API, CommonCrypto for PKCE, loopback HTTP server for OAuth)
 
 ## Build & Run
 ```bash
@@ -29,7 +29,7 @@ open SonyCameraToGooglePhotos/SonyCameraToGooglePhotos.xcodeproj
 - Errors are surfaced to the user via alerts, never silently swallowed
 
 ## Google Photos API
-- OAuth 2.0 via AppAuth with loopback redirect (no custom URL scheme needed for auth)
+- OAuth 2.0 with PKCE via loopback HTTP server redirect (no third-party auth library)
 - Upload is a 2-step process: upload bytes → batchCreate media items
 - Resumable uploads for files > 5MB
 - Scopes: `https://www.googleapis.com/auth/photoslibrary.appendonly`

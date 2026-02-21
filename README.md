@@ -64,7 +64,7 @@ xcodebuild -project SonyCameraToGooglePhotos/SonyCameraToGooglePhotos.xcodeproj 
 
 ## Architecture
 
-```
+```text
 MVVM + Services
 ├── Models          — Data types (MediaItem, CameraVolume, etc.)
 ├── ViewModels      — Business logic, state management (@MainActor)
