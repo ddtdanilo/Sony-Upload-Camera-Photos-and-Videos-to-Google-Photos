@@ -38,6 +38,9 @@ open SonyCameraToGooglePhotos/SonyCameraToGooglePhotos.xcodeproj
 - Photos: `DCIM/###MSDCF/*.{JPG,ARW}`
 - Videos: `PRIVATE/M4ROOT/CLIP/*.MP4`
 
+## Git Commits
+- NEVER add Co-Authored-By lines for Claude or any AI assistant in commit messages
+
 ## Secrets
 - OAuth Client ID and Secret must be configured in Constants.swift
 - NEVER commit actual credentials - the file contains placeholder values
